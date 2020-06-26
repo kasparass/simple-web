@@ -1,12 +1,16 @@
 let express = require('express')
 let mongodb = require('mongodb')
+const dotenv = require('dotenv')
+dotenv.config()
 
 let app = express()
 let db
 
 app.use(express.static('public'))
 
-let connectionString = 'mongodb+srv://kasp:ou5hE9qme0UkAXc@cluster0-zk7o6.mongodb.net/TodoApp?retryWrites=true&w=majority'
+
+
+let connectionString = `mongodb+srv://kasp:${process.env.PASSWORD}@cluster0-zk7o6.mongodb.net/TodoApp?retryWrites=true&w=majority`
 mongodb.connect(connectionString, {useNewUrlParser: true, useUnifiedTopology: true}, function(err, client) {
     db = client.db()
     app.listen(3000)
